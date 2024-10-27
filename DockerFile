@@ -1,20 +1,17 @@
-# Use an official Maven image to build the project
-FROM maven:3.8.5-openjdk-17 AS build
+# Use a GraalVM JDK image to build the project
+FROM ghcr.io/graalvm/graalvm-ce-java17:21.0.5 AS build
 
 # Set the working directory inside the container
 WORKDIR /app
 
 # Copy the project's Maven files
-COPY pom.xml .
-COPY .mvn .mvn
-COPY mvnw .
-COPY src ./src
+COPY . .
 
 # Build the project
-RUN ./mvnw clean package -DskipTests
+RUN mvn clean package -DskipTests
 
-# Use an official OpenJDK runtime image to run the application
-FROM openjdk:17-jdk-slim
+# Use a GraalVM JDK runtime image to run the application
+FROM ghcr.io/graalvm/graalvm-ce-java17:21.0.5
 
 # Set the working directory inside the container
 WORKDIR /app
