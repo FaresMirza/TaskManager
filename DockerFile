@@ -1,0 +1,29 @@
+# Use an official Maven image to build the project
+FROM maven:3.8.5-openjdk-17 AS build
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the project's Maven files
+COPY pom.xml .
+COPY .mvn .mvn
+COPY mvnw .
+COPY src ./src
+
+# Build the project
+RUN ./mvnw clean package -DskipTests
+
+# Use an official OpenJDK runtime image to run the application
+FROM openjdk:17-jdk-slim
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the built JAR file from the build image
+COPY --from=build /app/target/*.jar app.jar
+
+# Expose the application's port (adjust according to your app configuration)
+EXPOSE 8080
+
+# Run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]
