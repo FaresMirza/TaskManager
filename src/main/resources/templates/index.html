@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Task Manager</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Task Manager</h1>
+    <div class="actions">
+        <a href="/create" class="btn">Create New Task</a>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Duration (days)</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="task : ${tasks}">
+            <td th:text="${task.id}">1</td>
+            <td th:text="${task.name}">Task Name</td>
+            <td th:text="${task.duration}">Task Duration</td>
+            <td>
+                <a th:href="@{/edit/{id}(id=${task.id})}" class="btn btn-small">Edit</a>
+                <a th:href="@{/delete/{id}(id=${task.id})}" class="btn btn-small btn-danger">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
