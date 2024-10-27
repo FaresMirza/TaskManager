@@ -23,7 +23,7 @@ pipeline {
         stage('Package Docker Image') {
             steps {
                 script {
-                    sh 'sudo docker build -t mvc-image .'
+                sh 'sudo docker build -t mvc-image -f Dockerfile .'
                 }
             }
         }
