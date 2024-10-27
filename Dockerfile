@@ -10,8 +10,8 @@ COPY . .
 # Build the project
 RUN mvn clean package -DskipTests
 
-# Use the GraalVM JDK 21 image for running the application
-FROM ghcr.io/graalvm/graalvm-ce-java21:21.0.5
+# Use the official OpenJDK 21 image for running the application
+FROM openjdk:21-jdk-slim
 
 # Set the working directory inside the container
 WORKDIR /app
