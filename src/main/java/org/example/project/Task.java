@@ -15,7 +15,7 @@ public class Task {
     private Integer duration = 0;
 
     // Getters and Setters
-    pubclic Long getId() {
+    public Long getId() {
         return id;
     }
 
