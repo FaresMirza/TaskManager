@@ -33,7 +33,7 @@ pipeline {
                 script {
                     sh 'docker stop spring-boot-app || true && docker rm spring-boot-app || true'
 
-                    sh 'docker run -d --name spring-boot-app -p 8081:8080 mvc-image'
+                    sh 'docker run -d --name spring-boot-app -p 8000:8080 mvc-image'
                 }
             }
         }
